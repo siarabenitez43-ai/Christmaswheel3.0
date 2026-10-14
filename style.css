@@ -1,0 +1,85 @@
+:root { --red:#c0392b; --green:#1e7a46; --night:#14261d; --cream:#fff8e7; --gold:#f2c14e; }
+* { box-sizing: border-box; }
+body { margin:0; min-height:100vh; font-family:Georgia,'Times New Roman',serif; color:var(--cream);
+  background:radial-gradient(circle at 50% 0, #24503a, var(--night) 70%); }
+.snow { position:fixed; inset:0; pointer-events:none; opacity:.5;
+  background-image:radial-gradient(2px 2px at 20px 30px,#fff,transparent),radial-gradient(2px 2px at 90px 120px,#fff,transparent),
+  radial-gradient(3px 3px at 160px 60px,#fff,transparent);
+  background-size:200px 200px; animation:fall 14s linear infinite; }
+@keyframes fall { to { background-position:0 200px; } }
+@media (prefers-reduced-motion:reduce) { .snow { animation:none; } }
+
+/* Login / register */
+.auth { display:grid; place-items:center; padding:1rem; }
+.card { position:relative; width:min(380px,100%); background:var(--cream); color:#2a1a14; padding:2rem;
+  border-radius:12px; border:4px solid var(--red); display:grid; gap:1rem; box-shadow:0 10px 30px rgba(0,0,0,.4); }
+.card h1 { margin:0; color:var(--red); }
+label { display:grid; gap:.3rem; font-size:.95rem; }
+input { padding:.65rem; border:2px solid var(--green); border-radius:6px; font-size:1rem; }
+input:focus, button:focus-visible, a:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+.card button { padding:.7rem; background:var(--green); color:#fff; border:0; border-radius:6px; font-size:1rem; cursor:pointer; }
+.card button:hover { background:#17613a; }
+.card a { color:var(--red); font-size:.9rem; }
+.msg { margin:0; padding:.5rem .7rem; border-radius:6px; font-size:.9rem; }
+.err { background:#fde2de; color:#8a1c10; } .ok { background:#dff3e6; color:#14502d; }
+
+/* Dashboard */
+header { position:relative; display:flex; align-items:center; gap:1rem; padding:.8rem 1.2rem; background:rgba(0,0,0,.35); }
+.burger, #userBtn { background:none; border:0; color:var(--cream); font:inherit; font-size:1.3rem; cursor:pointer; }
+.user { position:relative; } #userMenu { position:absolute; top:100%; left:0; background:var(--cream); border-radius:6px; padding:.5rem 1rem; }
+#userMenu a { color:var(--red); text-decoration:none; }
+.logout { margin-left:auto; padding:.4rem .9rem; border:2px solid var(--gold); color:var(--gold); border-radius:6px; text-decoration:none; }
+main { display:grid; justify-items:center; gap:1.5rem; padding:2rem 1rem; }
+.wheel-wrap { position:relative; width:min(500px,90vw); aspect-ratio:1; }
+#wheel { width:100%; height:100%; border-radius:50%; border:8px solid var(--gold); box-shadow:0 0 40px rgba(242,193,78,.4);
+  transition:transform 6s cubic-bezier(.12,.6,.1,1); }
+.pointer { position:absolute; top:-14px; left:50%; translate:-50% 0; z-index:2; border:14px solid transparent; border-top:28px solid var(--cream); }
+#spin { position:absolute; top:50%; left:50%; translate:-50% -50%; width:84px; height:84px; border-radius:50%;
+  border:4px solid var(--gold); background:var(--red); color:#fff; font:bold 1.1rem Georgia,serif; cursor:pointer; }
+#spin:disabled { background:#6b6b6b; cursor:not-allowed; }
+.result { font-size:1.6rem; text-align:center; margin:0; }
+.result strong { color:var(--gold); }
+
+/* v2: header, table */
+.brand { font-size:1.2rem; }
+.who { display:grid; margin-left:auto; text-align:right; line-height:1.2; }
+.who small { opacity:.75; }
+.logout { margin-left:0; }
+.note { min-height:1.4em; margin:0; text-align:center; }
+table { width:min(640px,100%); border-collapse:collapse; background:rgba(0,0,0,.35); border:3px solid var(--gold); border-radius:10px; overflow:hidden; }
+th, td { padding:.7rem 1rem; text-align:left; border-bottom:1px solid rgba(255,248,231,.2); }
+th { background:var(--red); }
+.act { padding:.35rem .8rem; border-radius:6px; border:2px solid var(--gold); background:transparent; color:var(--gold); font:inherit; cursor:pointer; }
+.act:hover:not(:disabled) { background:var(--gold); color:var(--night); }
+.act:disabled { opacity:.35; cursor:not-allowed; }
+
+/* ---- Modal popup: confetti BEHIND the box, box on top ---- */
+.modal { position:fixed; inset:0; display:grid; place-items:center; background:rgba(0,0,0,.6); z-index:10; }
+.modal[hidden] { display:none; }
+
+/* Full-screen confetti canvas. z-index:1 keeps it under .modal-box (z-index:2),
+   so the confetti is visible OUTSIDE the box while the box stays on top. */
+#confetti { position:fixed; inset:0; width:100%; height:100%;
+  pointer-events:none; z-index:1; }
+
+.modal-box { position:relative; z-index:2; background:var(--cream); color:#2a1a14;
+  padding:2rem 2.5rem; border-radius:14px; border:5px solid var(--red); text-align:center;
+  min-width:min(320px,90vw); box-shadow:0 10px 40px rgba(0,0,0,.55); }
+.modal-box h3 { margin:0; color:var(--red); }
+.modal-box .big { font-size:2.2rem; color:var(--green); font-weight:bold; margin:.5rem 0 1.2rem; }
+.modal-box .note { margin:0 0 1rem; font-size:.9rem; }
+.modal-box button { padding:.6rem 1.4rem; background:var(--green); color:#fff; border:0; border-radius:6px; font-size:1rem; cursor:pointer; }
+
+/* ---- v2 additions ---- */
+header .who { display:flex; gap:.6rem; flex-wrap:wrap; }
+.chip { padding:.35rem .8rem; border:2px solid var(--gold); border-radius:6px; background:rgba(0,0,0,.25); }
+h1 { margin:0; color:var(--gold); text-align:center; }
+.status { min-height:1.5em; margin:0; text-align:center; font-size:1.1rem; }
+.picks { width:min(720px,100%); background:var(--cream); color:#2a1a14; border:4px solid var(--red); border-radius:12px; padding:1rem 1.2rem; }
+.picks h2 { margin:.2rem 0 .8rem; color:var(--red); }
+.picks table { width:100%; border-collapse:collapse; }
+.picks th, .picks td { padding:.6rem; border-bottom:1px solid #e3d5b5; text-align:left; }
+.picks th { color:var(--green); }
+.picks button { padding:.35rem .8rem; border:0; border-radius:5px; cursor:pointer; color:#fff; background:var(--green); }
+.picks button.hide { background:var(--red); }
+.picks button:disabled { background:#aaa; cursor:not-allowed; }
